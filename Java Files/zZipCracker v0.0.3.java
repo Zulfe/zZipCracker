@@ -17,16 +17,19 @@
  */
 
 
-package zipCracker;
+package zZipCracker;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane; 
+
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class zZipCracker {
@@ -81,22 +84,33 @@ public class zZipCracker {
 				while(true) { //while elements are still in the array list
 					String line;
 					if ((line = br.readLine()) != null) {
-					   passwordArray.add(line);
-					   System.out.println(line);
+						if(line.startsWith(" ")){
+							passwordArray.add("nullObject");
+							System.out.println("********nullObject********");
+						} else{
+							passwordArray.add(line);
+						}
 					}
-					zipper.setPassword((String) passwordArray.get(0)); //set the password to element position [passwordCounter]
-					System.out.println("Testing password no." + passwordCounter + ", which is " + passwordArray.get(0));
-					passwordCounter = passwordCounter + 1;
-					
-					try {
-						 zipper.extractAll(dest);
-						 br.close();
-						 JOptionPane.showMessageDialog(null, "The zip has been cracked. The password is " + passwordArray.get(0));
-						 break;
-					} catch(ZipException ze) {
-						System.out.println(passwordArray.size());
-						passwordArray.remove(0);
-					    continue;
+					//System.out.println("password I'm passing is: " + (String) passwordArray.get(0));
+						zipper.setPassword((String) passwordArray.get(0)); //set the password to element position [passwordCounter]
+						System.out.println("Testing password no." + passwordCounter + ", which is " + passwordArray.get(0));
+						passwordCounter = passwordCounter + 1;
+						String currentPassword = (String) passwordArray.get(0);
+						
+					if(currentPassword.length() > 0){
+						try {
+							zipper.extractAll(dest);
+						 	br.close();
+						 	JOptionPane.showMessageDialog(null, "The zip has been cracked. The password is " + passwordArray.get(0));
+						 	break;
+						} catch(ZipException ze) {
+							if(passwordArray.size() > 1)
+								System.out.println("Memory check: ArrayList consists of " + passwordArray.size() + " items.");
+							else
+								System.out.println("Memory check: ArrayList consists of " + passwordArray.size() + " item.");
+							passwordArray.remove(0);
+							continue;
+						}
 					}
 				}
 		} else {
@@ -105,7 +119,6 @@ public class zZipCracker {
 		}
 		
 		System.exit(0); //kills the program
-		
 	}
 	
 	//uses a GUI file chooser to make it easy for the user to choose a specific directory
