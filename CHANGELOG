@@ -1,0 +1,10 @@
+This changelog has been implemented on the v0.0.5 release of zZipCracker. 
+[11/27/14]
+
+[11/27/14]
+Version 0.0.5:
+	The entire project has been moved to a more OOP setup. The cracking and GUI components are now separate from the main functions. This should make things easier to read, less cluttered, and overall easier to debug.
+
+	A spelling error in the user command list has been fixed.
+
+	As of now, the dictionary builder has not been added. It will be added before the version 0.1.0 release.

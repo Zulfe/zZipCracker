@@ -1,0 +1,15 @@
+Damon (Zulfe) here. Thanks for using my program!
+
+This program is pretty easy to get running, but if you need some help:
+	1. This is a Java program, so make sure that you have the latest version of Java installed. You can find it at: https://www.java.com/en/download/
+
+	2. With Java installed, download a compiled JAR file and run it with Java.
+
+	3. If you just want to crack a zip file and already have a dictionary (preferably the one linked in the Dictionaries folder) downloaded, just click 'zZipCracker'.
+
+	4. Select a zip file, then your dictionary, and let the program do the work.
+
+Some errors you may run into:
+	If you run into errors with the program simply closing either before cracking or in the middle of cracking, check your dictionary. If you see the general line number that it was on when it crashed, check that line. You may have an error in the dictionary that's making the line unusable by the program.
+
+	If your commands to pause, continue, or kill the program, make sure you type them in caps. 
