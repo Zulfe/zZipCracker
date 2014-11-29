@@ -49,11 +49,10 @@ public class ZipCracker {
 	public void initCracking() throws ZipException, FileNotFoundException{
 		fileName = filePick(); //get the file's path using the file chooser GUI
 		System.out.println(fileName); //used for debugging
-		
 		zipper = new ZipFile(fileName); //instantiate the zip as a zip4j ZipFile object
 		
 		dest = JOptionPane.showInputDialog("Please input a destination for the unzipped file." + "\n" +
-												  "Triple check the path, as this program WILL overwrite directories.");
+											"Triple check the path, as this program WILL overwrite directories.");
 		
 		JOptionPane.showMessageDialog(null, "You will now choose your dictionary.");
 		txtFile = filePick();
@@ -74,21 +73,21 @@ public class ZipCracker {
 			while(userCrack == true) { //while the user has not run a command to stop the loop
 				String line;
 	            if ((line = br.readLine()) != null) {
-	            		currentPassword = line;
-	                    if(currentPassword.length() == 0 || currentPassword.contains("  ")){
-	                        System.out.println(currentPassword);
-	                    	readyAttempt("nullTest");
-	                    } else{
-	                        readyAttempt(currentPassword);
-	                    }
+	            	currentPassword = line;
+	                if(currentPassword.length() == 0 || currentPassword.contains("  ")){
+	                	System.out.println(currentPassword);
+	                	readyAttempt("nullTest");
+	                } else{
+	                    readyAttempt(currentPassword);
+	                }
 	                
 	            }
 			}
 			  //if the zip doesn't have a password, just open it. tell user that the zip is not locked
         } 
 		else {
-            	zipper.extractAll(dest);
-            	JOptionPane.showMessageDialog(null, "The selected zip was not password protected. It was extracted anyways.");
+            zipper.extractAll(dest);
+            JOptionPane.showMessageDialog(null, "The selected zip was not password protected. It was extracted anyways.");
         }
 
 }	
@@ -99,22 +98,22 @@ public class ZipCracker {
 		windowControl(currentPassword);
 		passwordCounter = passwordCounter + 1;
 		crackAttempt(currentPassword);
-		
 	}
 	
 	public static void crackAttempt(String currentPassword) throws IOException, InterruptedException{
-			try {
-				zipper.extractAll(dest);
-				br.close();
-				JOptionPane.showMessageDialog(null, "The zip has been cracked. The password is " + currentPassword);
-				System.exit(0);
+		try {
+			zipper.extractAll(dest);
+			br.close();
+			JOptionPane.showMessageDialog(null, "The zip has been cracked. The password is " + currentPassword);
+			System.exit(0);
 			
 			 //if a ZipException (unique to the Zip4j library) occurs, suppress it, remove the
 			 //password that doesn't work, check for user commands, and move to next password
-			} catch(ZipException ze) {
-				//zip has not been cracked, go to next line
-			}
-			inputHandlerInner();
+		} 
+		catch(ZipException ze) {
+			//zip has not been cracked, go to next line
+		}
+		inputHandlerInner();
 		}
 	
 	public static void windowControl(String currentPassword){

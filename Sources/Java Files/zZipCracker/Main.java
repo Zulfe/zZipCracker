@@ -61,7 +61,8 @@ public class Main {
 	    	zipFile.initCracking();
 	    	zipFile.executeCracking();
 	    	
-	    } else if(rc == 1)
+	    } 
+	    else if(rc == 1)
 	    	System.exit(0); //build dictionary. not added as of [11/24/14]
 	    else
 	    	System.exit(0); //exit
