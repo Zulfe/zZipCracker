@@ -21,9 +21,12 @@ package zZipCracker2;
 
 
 import java.io.IOException;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane; 
+
 import net.lingala.zip4j.exception.ZipException;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
@@ -36,11 +39,10 @@ public class Main {
 	public static JFileChooser userFile = new JFileChooser();
 	private static FileNameExtensionFilter filterZipTxt = new FileNameExtensionFilter("Zip Files", "zip", "txt");
 	
-	public static void main(String[] args) throws ZipException, IOException{
+	public static void main(String[] args) throws ZipException, IOException, InterruptedException{
 		userFile.setFileFilter(filterZipTxt); //this must be declared in the main, issues with the file
 											  //chooser not opening have occurred when run elsewhere
 		GUI.buildGUI(); //build the GUI
-		
 		
 		
 		
@@ -54,14 +56,15 @@ public class Main {
 	    
 	    System.out.println(rc); //Debugging for control flow on buttons.
 	    //Control flow for window
-	    if(rc == 2)
-	    	ZipCracker.zZipCracker(); //start cracking
-	    else if(rc == 1)
+	    if(rc == 2) {
+	    	ZipCracker zipFile = new ZipCracker();
+	    	zipFile.initCracking();
+	    	zipFile.executeCracking();
+	    	
+	    } else if(rc == 1)
 	    	System.exit(0); //build dictionary. not added as of [11/24/14]
 	    else
 	    	System.exit(0); //exit
-	    JOptionPane.showMessageDialog(null, "The zip could not be cracked, try a larger dictionary " +
-	    									"or report this issue to the software developer."); //debugging for program end location
 	}
 	
 }
